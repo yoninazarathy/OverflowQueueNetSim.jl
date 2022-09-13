@@ -99,7 +99,7 @@ plot!(x_grid, approx_dist_ecdf.(x_grid),
             xlabel="Sojourn time normalized by K",
             ylabel="Cumulative Distribution")
 
-savefig("SojournTimeApprox.pdf")
+savefig("figs/SojournTimeApprox.pdf")
 
 # frame(anim)
 # gif(anim, "varying_k.gif", fps = 2)
@@ -110,7 +110,7 @@ x_grid = 0.1:(top_x/100):top_x
 histogram(sojourn_times, bins =3000,normed=true,
         xlim=(0,top_x),lw=2, c=:black,ylim=(0,0.02),
         xlabel="Sojourn time", ylabel="Frequency",label=false,title="Buffer sizes = 50")
-savefig("SojournTimesHist50.pdf")
+savefig("figs/SojournTimesHist50.pdf")
 
 sojourn_times = do_k(100; scaled = false,max_time =10e5)
 top_x = quantile(sojourn_times,0.99)
@@ -118,7 +118,7 @@ x_grid = 0.1:(top_x/100):top_x
 histogram(sojourn_times, bins =3000,normed=true,
         xlim=(0,top_x),lw=2, c=:black,ylim=(0,0.02),
         xlabel="Sojourn time", ylabel="Frequency",label=false,title="Buffer sizes = 100")
-savefig("SojournTimesHist100.pdf")
+savefig("figs/SojournTimesHist100.pdf")
 
 
 sojourn_times = do_k(500; scaled = false)
@@ -128,7 +128,7 @@ histogram(sojourn_times,
         xlim=(0,top_x), c=:black, bins = 3000,
         normed=true,ylim=(0,0.02),
         lw = 2,xlabel="Sojourn time", ylabel="Frequency",label=false,title="Buffer sizes = 500")
-savefig("SojournTimesHist500.pdf")
+savefig("figs/SojournTimesHist500.pdf")
 
 sojourn_times = do_k(1000; scaled = false)
 top_x = quantile(sojourn_times,0.99)
@@ -137,4 +137,4 @@ histogram(sojourn_times,
         xlim=(0,top_x), c=:black, bins = 3000,
         normed=true,ylim=(0,0.02),
         lw = 2,xlabel="Sojourn time", ylabel="Frequency",label=false,title="Buffer sizes = 1000")
-savefig("SojournTimesHist1000.pdf")
+savefig("figs/SojournTimesHist1000.pdf")
