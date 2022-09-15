@@ -1,5 +1,4 @@
-function sim_mc_for_approx_dist( p::OverflowNetworkParameters;
-    λ = [1.5282856, 0.83785627, 1.37303848, 0.81047698, 0.83730385])
+function sim_mc_for_approx_dist( p::OverflowNetworkParameters, λ::Vector{Float64})
     n = p.n
     full_buffers = (1:n)[λ .> p.μ]
     s = length(full_buffers)
@@ -30,5 +29,5 @@ function sim_mc_for_approx_dist( p::OverflowNetworkParameters;
 end
 
 
-sim_approx_dist(p::OverflowNetworkParameters; 
-    N = 10^4)= ecdf([sim_mc_for_approx_dist(p) for _ in 1:N])
+mc_sim_approx_dist(p::OverflowNetworkParameters, λ::Vector{Float64}; N = 10^6) = 
+                                    ecdf([sim_mc_for_approx_dist(p, λ) for _ in 1:N])

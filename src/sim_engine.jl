@@ -42,7 +42,7 @@ Optional arguments are the maximal time for the simulation, times for logging ev
 """
 function do_sim(init_state::State, init_timed_events::Vector{TimedEvent}
                     ; 
-                    max_time::Float64 = 10.0, 
+                    max_time::Float64, 
                     log_times::Vector{Float64} = Float64[],
                     general_call_back = (time, state) -> nothing,
                     event_call_back = (time, state, event) -> nothing)
