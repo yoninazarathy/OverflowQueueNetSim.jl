@@ -5,7 +5,7 @@ function sim_mc_for_approx_dist( p::OverflowNetworkParameters, λ::Vector{Float6
     s_bar = n - s
 
     reward = 0.0 
-    state = -sample(1:n, weights(p.α)) 
+    state = -sample(1:n,weights(p.α)) 
     while state !=0
         if state > 0 #inside a buffer
             if state ∈ full_buffers

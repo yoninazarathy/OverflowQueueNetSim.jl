@@ -13,7 +13,7 @@ example1 = OverflowNetworkParameters(   K = ones(Int,5),
                                             0.0 0.5 0.0 0.1 0.1;
                                             0.0 0.2 0.2 0.0 0.0;
                                             0.2 0.0 0.1 0.1 0.0],                                    
-                                        α_scv = 3.0*ones(5),
+                                        α_scv = 1.0*ones(5),
                                         μ_scv = 0.7*ones(5)
                                         )
 #This is computed using https://github.com/hmjansen/overflow-algorithm
