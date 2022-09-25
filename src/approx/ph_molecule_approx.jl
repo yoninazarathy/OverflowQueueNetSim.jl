@@ -32,7 +32,7 @@ function make_dist(p::OverflowNetworkParameters, λ::Vector{Float64})
     α = p.α[buffer_order]
     Pc = p.P[buffer_order, buffer_order]
     A = make_absorbtion_matrix(p, λ)
-    T = [Matrix(I,s,s) zeros(s,s_bar)]*Pc*A[:,2:end]
+    T = Pc[1:s,:] * A[:,2:end]    
     τ = (A'*α/sum(α))[2:end]    
     return (x)->1 - τ' * T^floor(x) * ones(s)
 end
