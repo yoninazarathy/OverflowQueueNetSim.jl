@@ -1,4 +1,5 @@
 @with_kw struct OverflowNetworkParameters
+    name::String = ""                               #Example name
     K::Vector{Int}                                  #The buffer sizes
     α::Vector{Float64}                              #The rates of external arrivals to queues
     μ::Vector{Float64}                              #The service rates at queues

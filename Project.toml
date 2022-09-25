@@ -1,5 +1,6 @@
 [deps]
 Accessors = "7d9f7c33-5ae7-4f3b-8dc6-eff91059b697"
 Calculus = "49dc2e85-a5d0-5ad3-a950-438e2897f1b9"
+Conda = "8f4d0f93-b110-5947-807f-2305c1781a2d"
 Parameters = "d96e819e-fc66-5662-9728-84c9c7592b0a"
 PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
