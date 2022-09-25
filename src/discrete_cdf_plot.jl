@@ -29,9 +29,9 @@ function plot_discrete_cdf(#plt::Plots.Plot{Plots.GRBackend},
                         label=false)
     end
 
-    plt = plot([x[1],x[2]],[y[1],y[1]], c=:black,lw=5,label = "Molecule PH approximation" )
+    plt = plot([x[1],x[2]],[y[1],y[1]], c=:black,lw=2,label = "Molecule PH approximation" )
     for i in 2:length(x)-1
-        plt = plot(plt,[x[i],x[i+1]],[y[i],y[i]], c=:black,lw=3,label =  false)
+        plt = plot(plt,[x[i],x[i+1]],[y[i],y[i]], c=:black,lw=2,label =  false)
     end
 
     for i in 1:length(x)

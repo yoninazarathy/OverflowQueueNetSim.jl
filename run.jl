@@ -33,7 +33,11 @@ function do_sim_k(all_k, example; max_time = 2e6, seed = 0)
         return ecdf(sojourn_times/all_k), sojourn_times/all_k
 end
 
-function create_cdfs(example::OverflowNetworkParameters, λsol::Vector{Float64}; save_figs = true)
+function create_cdfs(   example::OverflowNetworkParameters, 
+                        λsol::Vector{Float64}, 
+                        title::String; 
+                        save_figs = true,
+                        legend = :bottomright)
 
         approx_dist_ecdf_ph_type = make_dist(example, λsol)
         # approx_dist_ecdf_mc_sim = mc_sim_approx_dist(example, λsol)
@@ -52,7 +56,8 @@ function create_cdfs(example::OverflowNetworkParameters, λsol::Vector{Float64};
                 label = "Buffer Scaling K=50",
                 ylim=(0,1),lw=2, c=:purple,
                 xlabel="Sojourn time normalized by K",
-                ylabel="Cumulative Distribution")
+                ylabel="Cumulative Distribution",
+                title = title)
 
         plt = plot(plt, x_grid, scaled_sojourn_ecdf_100.(x_grid), 
                 label = "Buffer Scaling K=100",
@@ -61,7 +66,7 @@ function create_cdfs(example::OverflowNetworkParameters, λsol::Vector{Float64};
         plt = plot(plt, x_grid, scaled_sojourn_ecdf_500.(x_grid), 
                 label = "Buffer Scaling K=500",
                 ylim=(0,1),lw=2,
-                legend=:bottomright, c=:green)
+                legend=legend, c=:green)
 
         # plt = plot(plt, x_grid, scaled_sojourn_ecdf_2000.(x_grid), 
         #         label = "Buffer Scaling K=2000",
@@ -93,14 +98,14 @@ function create_sojourn_densities(example::OverflowNetworkParameters; save_figs 
         x_grid = 0.1:(top_x/100):top_x
         histogram(sojourn_times_50, bins = 3000, normed=true,
                 xlim=(0,top_x),lw=2, c=:black, ylim=(0,10),
-                xlabel="Sojourn time normalized by K", ylabel="Frequency",label=false,title="Buffer sizes = 50")
+                xlabel="Sojourn time normalized by K", ylabel="Density",label=false,title="Buffer sizes = 50")
         save_figs && savefig("figs/$(example.name)_SojournTimesHist50.pdf")
 
         top_x = 5#quantile(sojourn_times_100,0.99)
         x_grid = 0.1:(top_x/100):top_x
         histogram(sojourn_times_100, bins =3000,normed=true,
                 xlim=(0,top_x),lw=2, c=:black, ylim=(0, 10),
-                xlabel="Sojourn time normalized by K", ylabel="Frequency",label=false,title="Buffer sizes = 100")
+                xlabel="Sojourn time normalized by K", ylabel="Density",label=false,title="Buffer sizes = 100")
         save_figs && savefig("figs/$(example.name)_SojournTimesHist100.pdf")
 
         top_x = 5#quantile(sojourn_times_500,0.99)
@@ -108,7 +113,7 @@ function create_sojourn_densities(example::OverflowNetworkParameters; save_figs 
         histogram(sojourn_times_500,
                 xlim=(0,top_x), c=:black, bins = 3000,
                 normed=true,ylim=(0,10),
-                lw = 2,xlabel="Sojourn time normalized by K", ylabel="Frequency",label=false,title="Buffer sizes = 500")
+                lw = 2,xlabel="Sojourn time normalized by K", ylabel="Density",label=false,title="Buffer sizes = 500")
         save_figs && savefig("figs/$(example.name)_SojournTimesHist500.pdf")
 
         top_x = 5#quantile(sojourn_times_2000,0.99)
@@ -116,20 +121,24 @@ function create_sojourn_densities(example::OverflowNetworkParameters; save_figs 
         histogram(sojourn_times_2000,
                 xlim=(0,top_x), c=:black, bins = 3000,
                 normed=true,ylim=(0,10),
-                lw = 2,xlabel="Sojourn time normalized by K", ylabel="Frequency",label=false,title="Buffer sizes = 2000")
+                lw = 2,xlabel="Sojourn time normalized by K", ylabel="Density",label=false,title="Buffer sizes = 2000")
         save_figs && savefig("figs/$(example.name)_SojournTimesHist2000.pdf")
 
         return nothing
 end
 
 println("Running simulations for CDFs of example 1")
-create_cdfs(example1, λ1)
+create_cdfs(example1, λ1, "$(length(example1)) buffer network with $nfull1 overflow")
 
 println("Running simulations for CDFs of example 2")
-create_cdfs(example2, λ2)
+create_cdfs(example2, λ2, "$(length(example2)) buffer network with $nfull2 overflows",legend=false)
 
 println("Running simulations for CDFs of example 3")
-create_cdfs(example3, λ3)
+create_cdfs(example3, λ3, "$(length(example3)) buffer network with $nfull3 overflows",legend=false)
 
-println("Running simulations for sojourn densities of example 1")
-create_sojourn_densities(example1)
+println("Running simulations for CDFs of example 4")
+create_cdfs(example4, λ4, "$(length(example4)) buffer network with $nfull4 overflows",legend=false)
+
+
+println("Running simulations for sojourn densities of example 2")
+create_sojourn_densities(example2)

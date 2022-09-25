@@ -24,3 +24,4 @@ end
 queue_full(st::OverflowNetworkState, q::Int) = length(st.queues[q]) >= st.params.K[q]
 queue_empty_idle(st::OverflowNetworkState, q::Int) = isempty(st.queues[q])
 
+Base.length(net::OverflowNetworkParameters) = length(net.K)
